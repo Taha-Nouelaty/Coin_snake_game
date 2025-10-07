@@ -1,0 +1,235 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvjgcny7h8l1b"]
+
+[ext_resource type="Script" uid="uid://l5mlp40yejrn" path="res://main.gd" id="1_lwqv3"]
+[ext_resource type="PackedScene" uid="uid://rewrbmn2i188" path="res://snakesegment.tscn" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://do4yh6c5xaycn" path="res://Assets/bg.png" id="2_icrf6"]
+[ext_resource type="PackedScene" uid="uid://b36ka28vcx3dj" path="res://Scene/hud.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://cym5vcev41f4w" path="res://Assets/Coins.jpeg" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://dwqsggnsu3bs0" path="res://game_over_menu.tscn" id="6_7mycd"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_lwqv3")
+snake_scene = ExtResource("2_1bvp3")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(500, 550)
+texture = ExtResource("2_icrf6")
+
+[node name="Hud" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Food" type="Sprite2D" parent="."]
+position = Vector2(25, 25)
+scale = Vector2(0.25, 0.2)
+texture = ExtResource("5_7mycd")
+
+[node name="GameOverMenu" parent="." instance=ExtResource("6_7mycd")]
+process_mode = 2
+visible = false
+
+[node name="Library" type="Control" parent="."]
+visible = false
+z_index = 100
+anchors_preset = 0
+offset_top = 50.0
+offset_right = 1000.0
+offset_bottom = 1050.0
+mouse_filter = 2
+
+[node name="BG" type="ColorRect" parent="Library"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32156864, 0.43529412, 0.81960785, 1)
+
+[node name="MG" type="ColorRect" parent="Library"]
+custom_minimum_size = Vector2(600, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -350.0
+offset_right = 300.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8509804, 0.56078434, 0.11372549, 1)
+
+[node name="container" type="VBoxContainer" parent="Library"]
+custom_minimum_size = Vector2(600, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -350.0
+offset_right = 300.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="insanity" type="HBoxContainer" parent="Library/container"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Library/container/insanity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Spam"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="button" type="Button" parent="Library/container/insanity"]
+layout_mode = 2
+text = "     5 coins     "
+
+[node name="insanity3" type="HBoxContainer" parent="Library/container"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Library/container/insanity3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Siege"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="button" type="Button" parent="Library/container/insanity3"]
+layout_mode = 2
+text = "     20 coins     "
+
+[node name="insanity4" type="HBoxContainer" parent="Library/container"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Library/container/insanity4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "BrainRot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="button" type="Button" parent="Library/container/insanity4"]
+layout_mode = 2
+text = "     67 coins     "
+
+[node name="insanity2" type="HBoxContainer" parent="Library/container"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Library/container/insanity2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Taha's Yapp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="button" type="Button" parent="Library/container/insanity2"]
+layout_mode = 2
+text = "     100 coins     "
+
+[node name="insanity5" type="HBoxContainer" parent="Library/container"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Library/container/insanity5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "RageQuit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="button" type="Button" parent="Library/container/insanity5"]
+layout_mode = 2
+text = "     500 coins     "
+
+[node name="Message" type="Label" parent="Library/container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "you dont have"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Library/container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Go back"
+
+[node name="view_book" type="Control" parent="."]
+visible = false
+z_index = 101
+anchors_preset = 0
+offset_top = 50.0
+offset_right = 1000.0
+offset_bottom = 1050.0
+
+[node name="ColorRect" type="ColorRect" parent="view_book"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.55744594, 0.6957258, 0.7418232, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="view_book"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="title" type="Label" parent="view_book/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "book title
+"
+horizontal_alignment = 1
+
+[node name="story" type="Label" parent="view_book/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "bjuhui"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="view_book/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Go back"
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="library" from="GameOverMenu" to="." method="_on_game_over_menu_library"]
+[connection signal="restart" from="GameOverMenu" to="." method="_on_game_over_menu_restart"]
+[connection signal="pressed" from="Library/container/insanity/button" to="." method="_on_button_pressed_spam"]
+[connection signal="pressed" from="Library/container/insanity3/button" to="." method="_on_button_pressed_Siege"]
+[connection signal="pressed" from="Library/container/insanity4/button" to="." method="_on_button_pressed_BrainRot"]
+[connection signal="pressed" from="Library/container/insanity2/button" to="." method="_on_button_pressed_Tahas_Life"]
+[connection signal="pressed" from="Library/container/insanity5/button" to="." method="_on_button_pressed_RageQuit"]
+[connection signal="pressed" from="Library/container/Button" to="." method="_on_button_pressed_goback"]
+[connection signal="pressed" from="view_book/VBoxContainer/Button" to="." method="on_closed_shop"]
