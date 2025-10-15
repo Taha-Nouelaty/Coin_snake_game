@@ -2,7 +2,6 @@ extends Control
 
 @export var snake_scene : PackedScene
 
-
 var score : int
 var game_started : bool = false
 
@@ -17,10 +16,14 @@ var snake_data : Array
 var snake : Array
 var total_coins: int = 0
 var restart = false
+var snake_theme: StyleBoxFlat = preload("res://snakesegment.tres")
 
 @export var start_speed: float = 0.25
 var next_direction := Vector2.RIGHT
 var speed := start_speed
+var die_wall = true
+var die_circle = true
+var coin_mult = 1
 
 
 
@@ -31,6 +34,16 @@ var left = Vector2(-1, 0)
 var right = Vector2(1, 0)
 var move_direction : Vector2
 var can_move: bool
+
+var snake_skins_unlocked = [true, false, false, false, false, false]
+var snake_skins_cost = [0, 10, 25, 50, 75, 100]
+var snake_skins_colors = [
+	Color(0.314, 0.722, 0.31, 1.0), 
+	Color(0.227, 0.671, 0.702, 1.0),
+	Color(0.847, 0.341, 0.31, 1.0),
+	Color(0.592, 0.482, 0.792, 1.0),
+	Color("1668c1"),
+	Color(0.902, 0.6, 0.224, 1.0)]
 
 
 
@@ -62,6 +75,7 @@ func add_segment(pos):
 	snake_data.append(pos)
 	var SnakeSegment = snake_scene.instantiate()
 	SnakeSegment.position = (pos * cell_size) + Vector2(0, cell_size)
+	SnakeSegment.add_theme_stylebox_override("panel",snake_theme)
 	add_child(SnakeSegment)
 	snake.append(SnakeSegment)
 	SnakeSegment.add_to_group("segments")
@@ -119,18 +133,18 @@ func _on_move_timer_timeout() -> void:
 	
 	
 func check_out_of_bounds():
-	if snake_data[0].x < 0 or snake_data[0].x > cells - 1 or snake_data[0].y < 0 or snake_data[0].y > cells - 1:
+	if (snake_data[0].x < 0 or snake_data[0].x > cells - 1 or snake_data[0].y < 0 or snake_data[0].y > cells - 1) and die_wall:
 		end_game()
 		
 func check_self_eaten():
 	for i in range(1, len(snake_data)):
-		if snake_data[0] == snake_data[i]:
+		if snake_data[0] == snake_data[i] and die_circle:
 			end_game()
 			
 func check_food_eaten():
 	if snake_data[0] == food_pos:
 		score += 1
-		total_coins += 1
+		total_coins += coin_mult
 		$Hud.get_node("Score_Label").text = "SCORE: " + str(score)
 		$Hud.get_node("coins").text = "COINS: " + str(total_coins)
 		add_segment(old_data[-1])
@@ -167,7 +181,11 @@ sjbpbhsabhsp
 
 s
 sp;s;sllsm mmmcmc cccvcccccffffdfdfddfffgtgvbtgvb yhbn yhnb ujhn ujmnijkmikm, iok,m0po;l.[p;][\
-swqqllllllllllllllllllmmkkkkkkkkkkkkkkjjjiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuyyyyyyyyyyyyyyyytttttttttttttttttttttttttttttttttttttttttteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqqq
+swqqllllllllmkmkmkmk
+mkmkmkmkmmk
+mkmkmkmkmmkmkmkmkmkmkmmkmkmk
+mkmkmkmmkmkmkmkmkmkmkmkmkmknjnjnnjnjbhbbhbgvgvgvgawawawawawaaaaawaaaarrrtgrfsdddssdsdsdsqdwdwwwdwdwdwttgtgtggggtgkkkkikikikikikikiooopoponininommomo
+llllllllllmmkkkkkkkkkkkkkkjjjiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuyyyyyyyyyyyyyyyytttttttttttttttttttttttttttttttttttttttttteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqqq
 deddddddddddddddddddddddddddddddnljnnyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
 yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyu
@@ -254,6 +272,7 @@ instance_from_id(
 	
 	ima fanum tax u right now crowdie who u think u are huh?
 	give me all of your money so no one get hurt
+	tung tung tung sahur ta ta ta sahur
 	>: ( by palms hurt from the metal of my very old macbook 
 	its curving in from the edges aswell only if they ahve filleted it or atleast make it a more conforatble material 
 ", 
@@ -396,6 +415,10 @@ kookokokokokokko
 
 
 6767676767676676767676767676767676767676676767
+sixseven six seven six  seven six   seven six    seven 
+six seveeeeeeeeeeeeeeeeeeen
+six seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeevn
+siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiix seven
 
 aishsajsjsakss
 sbjasksab
@@ -521,16 +544,17 @@ s
 nn
 ss
 ns
-ani
+ani am ii am i am i am i am i am i am i am i am i am i am i amnininnimo
 sai
 asinsnsnnosnsnosanonoinotoieino
 en
-a
+a j j j j j j j j j j j j j j  j j j j j j j j  j j j jjj j j jjj jjj j jj j j j j j jjj  j j j  j j  j jj j j j 
 nas
 
-sin
+sin i wish i could eat breakfast ngl it would hit real hard man.
+
 nisinsin
-ain
+ainnininsinisnsins snisninsisnisisn
 aniainasinsain
 sainsa
 i
@@ -560,6 +584,9 @@ var book_titles = ["Spam", "Siege", "BrainRot", "Tahas Yapp", "RageQuit"]
 func _on_game_over_menu_library() -> void:
 	$Library.visible = true
 	$GameOverMenu.visible = false
+	$Skin_Shop.visible = false 
+
+
 
 func unlocked(book_number):
 	print("look here")
@@ -575,13 +602,14 @@ func unlocked(book_number):
 			
 func view_book(book_number):
 	$view_book.visible = true
-	$view_book/VBoxContainer/story.text = books[book_number]
-	$view_book/VBoxContainer/title.text = book_titles[book_number]
+	$view_book/ScrollContainer/VBoxContainer/story.text = books[book_number]
+	$view_book/ScrollContainer/VBoxContainer/title.text = book_titles[book_number]
 	
 
 func on_closed_shop() -> void:
 	$view_book.visible= false
 	
+
 
 
 func _on_button_pressed_spam() -> void:
@@ -605,5 +633,60 @@ func _on_button_pressed_RageQuit() -> void:
 
 func _on_button_pressed_goback() -> void:
 	$Library.visible = false
+	$Skin_Shop.visible = false 
 	$GameOverMenu.visible = true
-	print("sigmaboy 67")
+
+
+
+func _on_go_back_2_button_pressed() -> void:
+	$Skin_Shop.visible = false 
+	$GameOverMenu.visible = true
+	$Library.visible = false
+
+func _on_regular_pressed() -> void:
+	switch_snake_skin(0)
+
+func _on_fire_pressed() -> void:
+	switch_snake_skin(2)
+
+func _on_ice_pressed() -> void:
+	switch_snake_skin(1)
+
+func _on_portal_pressed() -> void:
+	switch_snake_skin(3)
+
+func _on_gold_pressed() -> void:
+	switch_snake_skin(5)
+
+
+func _on_game_over_menu_skinshop() -> void:
+	$Library.visible = false
+	$GameOverMenu.visible = false
+	$Skin_Shop.visible = true 
+
+
+func _on_water_pressed() -> void:
+	switch_snake_skin(4)
+
+func switch_snake_skin(skin_number):
+	if snake_skins_unlocked[skin_number] or total_coins >= snake_skins_cost[skin_number]:
+		if not snake_skins_unlocked[skin_number]:
+			total_coins -= snake_skins_cost[skin_number]
+			snake_skins_unlocked[skin_number] = true
+			$Hud/coins.text = "Coins: " + str(total_coins) 
+		snake_theme.bg_color = snake_skins_colors[skin_number]
+		$MoveTimer.wait_time = 0.1
+		coin_mult = 1
+		die_circle = true
+		die_wall = true
+		match skin_number:
+			1:
+				$MoveTimer.wait_time = 0.13
+			2:
+				$MoveTimer.wait_time = 0.07
+			3:
+				die_wall = false
+			4:
+				die_circle = false
+			5:
+				coin_mult = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvjgcny7h8l1b"]
+[gd_scene load_steps=14 format=3 uid="uid://cvjgcny7h8l1b"]
 
 [ext_resource type="Script" uid="uid://l5mlp40yejrn" path="res://main.gd" id="1_lwqv3"]
 [ext_resource type="PackedScene" uid="uid://rewrbmn2i188" path="res://snakesegment.tscn" id="2_1bvp3"]
@@ -6,6 +6,80 @@
 [ext_resource type="PackedScene" uid="uid://b36ka28vcx3dj" path="res://Scene/hud.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://cym5vcev41f4w" path="res://Assets/Coins.jpeg" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dwqsggnsu3bs0" path="res://game_over_menu.tscn" id="6_7mycd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7mycd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0.3137255, 0.72156864, 0.30980393, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.17565706, 0.41275626, 0.17247984, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+bg_color = Color(0.8452766, 0.34041294, 0.30934602, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.52772737, 0.17293078, 0.15613809, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+bg_color = Color(0.22960192, 0.6715509, 0.703012, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.019642737, 0.48160887, 0.6338103, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+bg_color = Color(0.5924039, 0.48084134, 0.7903937, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.3817598, 0.27618513, 0.55123734, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
+bg_color = Color(0.08627451, 0.40784314, 0.75686276, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.12156863, 0.047058824, 0.7294118, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+bg_color = Color(0.9019608, 0.6, 0.22352941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.4307536, 0.3755206, 0.12125435, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -32,6 +106,7 @@ process_mode = 2
 visible = false
 
 [node name="Library" type="Control" parent="."]
+process_mode = 3
 visible = false
 z_index = 100
 anchors_preset = 0
@@ -175,9 +250,11 @@ vertical_alignment = 1
 [node name="Button" type="Button" parent="Library/container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
+action_mode = 0
 text = "Go back"
 
 [node name="view_book" type="Control" parent="."]
+process_mode = 3
 visible = false
 z_index = 101
 anchors_preset = 0
@@ -194,42 +271,168 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.55744594, 0.6957258, 0.7418232, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="view_book"]
+[node name="ScrollContainer" type="ScrollContainer" parent="view_book"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="view_book/ScrollContainer"]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
 alignment = 1
 
-[node name="title" type="Label" parent="view_book/VBoxContainer"]
+[node name="title" type="Label" parent="view_book/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "book title
 "
 horizontal_alignment = 1
 
-[node name="story" type="Label" parent="view_book/VBoxContainer"]
+[node name="story" type="Label" parent="view_book/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "bjuhui"
+label_settings = SubResource("LabelSettings_7mycd")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="Button" type="Button" parent="view_book/VBoxContainer"]
+[node name="Button" type="Button" parent="view_book/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Go back"
 
+[node name="Skin_Shop" type="Control" parent="."]
+process_mode = 3
+visible = false
+anchors_preset = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 700.0
+offset_bottom = 750.0
+
+[node name="ColorRect" type="ColorRect" parent="Skin_Shop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8509804, 0.56078434, 0.11372549, 1)
+
+[node name="Label" type="Label" parent="Skin_Shop"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.0
+offset_top = 25.0
+offset_right = 91.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Magic Skin Shop"
+
+[node name="Regular" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_7mycd")
+text = "Regular 
+Skin"
+
+[node name="Fire" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_left = 299.0
+offset_top = 100.0
+offset_right = 399.0
+offset_bottom = 200.0
+tooltip_text = "Speeds up the snake. Costs 25 coins."
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
+text = "Fire
+Skin"
+
+[node name="Ice" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 100.0
+offset_right = 252.0
+offset_bottom = 200.0
+tooltip_text = "Slows down the snake. Costs 10 coins."
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5vw27")
+text = "Ice
+Skin"
+
+[node name="Portal" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 250.0
+offset_right = 101.0
+offset_bottom = 350.0
+tooltip_text = "Makes you go through walls. 50 coins"
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_kek77")
+text = "Magic
+Skin"
+
+[node name="Water" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 250.0
+offset_right = 252.0
+offset_bottom = 350.0
+tooltip_text = "Makes you go through yourself. 75 coins"
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_efxa6")
+text = "Water
+Skin"
+
+[node name="Gold" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 250.0
+offset_right = 402.0
+offset_bottom = 350.0
+tooltip_text = "Gives double coins. 100 coins"
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")
+text = "Gold
+Skin"
+
+[node name="Go Back 2Button" type="Button" parent="Skin_Shop"]
+layout_mode = 0
+offset_top = 375.0
+offset_right = 400.0
+offset_bottom = 475.0
+theme_override_font_sizes/font_size = 40
+text = "Go Back To Game Menu"
+
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
 [connection signal="library" from="GameOverMenu" to="." method="_on_game_over_menu_library"]
 [connection signal="restart" from="GameOverMenu" to="." method="_on_game_over_menu_restart"]
+[connection signal="skinshop" from="GameOverMenu" to="." method="_on_game_over_menu_skinshop"]
 [connection signal="pressed" from="Library/container/insanity/button" to="." method="_on_button_pressed_spam"]
 [connection signal="pressed" from="Library/container/insanity3/button" to="." method="_on_button_pressed_Siege"]
 [connection signal="pressed" from="Library/container/insanity4/button" to="." method="_on_button_pressed_BrainRot"]
 [connection signal="pressed" from="Library/container/insanity2/button" to="." method="_on_button_pressed_Tahas_Life"]
 [connection signal="pressed" from="Library/container/insanity5/button" to="." method="_on_button_pressed_RageQuit"]
 [connection signal="pressed" from="Library/container/Button" to="." method="_on_button_pressed_goback"]
-[connection signal="pressed" from="view_book/VBoxContainer/Button" to="." method="on_closed_shop"]
+[connection signal="pressed" from="view_book/ScrollContainer/VBoxContainer/Button" to="." method="on_closed_shop"]
+[connection signal="pressed" from="Skin_Shop/Regular" to="." method="_on_regular_pressed"]
+[connection signal="pressed" from="Skin_Shop/Fire" to="." method="_on_fire_pressed"]
+[connection signal="pressed" from="Skin_Shop/Ice" to="." method="_on_ice_pressed"]
+[connection signal="pressed" from="Skin_Shop/Portal" to="." method="_on_portal_pressed"]
+[connection signal="pressed" from="Skin_Shop/Water" to="." method="_on_water_pressed"]
+[connection signal="pressed" from="Skin_Shop/Gold" to="." method="_on_gold_pressed"]
+[connection signal="pressed" from="Skin_Shop/Go Back 2Button" to="." method="_on_go_back_2_button_pressed"]
